@@ -387,7 +387,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-group"
       data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col p-2 group-data-[collapsible=icon]:w-fit group-data-[collapsible=icon]:items-center! duration-300", className)}
+      className={cn("relative flex w-full min-w-0 flex-col p-2 group-data-[collapsible=icon]:w-fit duration-200 group-data-[collapsible=icon]:items-center!", className)}
       {...props}
     />
   )
@@ -445,7 +445,7 @@ function SidebarGroupContent({
     <div
       data-slot="sidebar-group-content"
       data-sidebar="group-content"
-      className={cn("w-full text-sm group-data-[collapsible=icon]:w-fit! group-data-[collapsible=icon]:overflow-hidden", className)}
+      className={cn("w-full text-sm group-data-[collapsible=icon]:w-fit! duration-200 group-data-[collapsible=icon]:overflow-hidden", className)}
       {...props}
     />
   )

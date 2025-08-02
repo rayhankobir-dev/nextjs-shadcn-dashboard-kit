@@ -62,7 +62,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader className="flex h-16 w-full flex-row items-center justify-start border-b border-dashed group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
-        <SidebarMenu className="group-data-[collapsible=icon]:w-fit">
+        <SidebarMenu className="duration-200 group-data-[collapsible=icon]:w-fit">
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild

@@ -1,4 +1,4 @@
-import { Fingerprint, Lock } from "lucide-react";
+import { Fingerprint } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";

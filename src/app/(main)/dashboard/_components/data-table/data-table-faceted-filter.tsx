@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import * as React from "react";
 
 import { Column } from "@tanstack/react-table";

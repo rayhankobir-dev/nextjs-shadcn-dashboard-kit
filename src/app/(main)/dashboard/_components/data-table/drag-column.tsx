@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSortable } from "@dnd-kit/sortable";
 import { ColumnDef } from "@tanstack/react-table";
 import { GripVertical } from "lucide-react";

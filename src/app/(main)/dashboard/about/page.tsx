@@ -1,5 +1,8 @@
-import React from "react";
+import { notFound } from "next/navigation";
 
-export default function Page() {
-  return <div>page</div>;
+function AboutPage() {
+  notFound();
+  return <div>About</div>;
 }
+
+export default AboutPage;

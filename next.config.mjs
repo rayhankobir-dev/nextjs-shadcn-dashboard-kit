@@ -3,11 +3,19 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "********",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
-        source: "/dashboard",
-        destination: "/dashboard/default",
+        source: "/",
+        destination: "/dashboard",
         permanent: false,
       },
     ];

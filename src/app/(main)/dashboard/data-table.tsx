@@ -28,11 +28,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDataTableInstance } from "@/hooks/use-data-table-instance";
 
-import { DataTable as DataTableNew } from "../_components/data-table/data-table";
-import { DataTablePagination } from "../_components/data-table/data-table-pagination";
-import { withDndColumn } from "../_components/data-table/table-utils";
-
 import { dashboardColumns } from "./_components/columns";
+import { DataTable as DataTableNew } from "./_components/data-table/data-table";
+import { DataTablePagination } from "./_components/data-table/data-table-pagination";
+import { withDndColumn } from "./_components/data-table/table-utils";
 
 export const schema = z.object({
   id: z.number(),

@@ -1,6 +1,11 @@
 "use client";
 
+import React from "react";
+
+import { useRouter } from "next/navigation";
+
 import { EllipsisVertical, CircleUser, CreditCard, MessageSquareDot, LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,6 +18,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
+import Spinner from "@/components/ui/spinner";
+import { authClient } from "@/lib/auth-client";
 import { getInitials } from "@/lib/utils";
 
 export function NavUser({
@@ -24,7 +31,26 @@ export function NavUser({
     readonly avatar: string;
   };
 }) {
+  const [logoutInProgress, setLogoutInProgress] = React.useState(false);
   const { isMobile } = useSidebar();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onRequest: () => setLogoutInProgress(true),
+        onSuccess: () => {
+          router.push("/auth/login");
+          toast.success("Signed out successfully");
+        },
+        onError(ctx) {
+          toast.error("Failed to sign out", {
+            description: ctx.error.message,
+          });
+        },
+      },
+    });
+  };
 
   return (
     <SidebarMenu>
@@ -80,8 +106,8 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
+            <DropdownMenuItem onClick={handleSignOut}>
+              {logoutInProgress ? <Spinner /> : <LogOut />}
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

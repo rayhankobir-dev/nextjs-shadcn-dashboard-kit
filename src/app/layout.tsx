@@ -23,7 +23,22 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body className={`${inter.className} min-h-screen antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange enableSystem={false}>
           {children}
-          <Toaster />
+          <Toaster
+            className="group min-h-12! gap-3!"
+            position="bottom-right"
+            toastOptions={{
+              classNames: {
+                icon: "size-5! shrink-0!",
+                title: "text-base font-medium",
+                description: "text-sm",
+                toast: "group toast-sonner",
+                error: "bg-red-50! text-rose-600!",
+                info: "bg-blue-50! text-blue-600!",
+                success: "bg-green-50! text-green-600!",
+                warning: "bg-orange-50! text-orange-600!",
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

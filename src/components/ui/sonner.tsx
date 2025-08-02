@@ -15,6 +15,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-bg": "var(--popover)",
           "--normal-text": "var(--popover-foreground)",
           "--normal-border": "var(--border)",
+          "actionButton": "group-[.toast]:!bg-primary group-[.toast]:!text-primary-foreground",
+          "cancelButton": "group-[.toast]:!bg-muted group-[.toast]:!text-muted-foreground"
         } as React.CSSProperties
       }
       {...props}

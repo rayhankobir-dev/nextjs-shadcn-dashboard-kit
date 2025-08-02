@@ -3,7 +3,10 @@
 
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { BadgeCheck, Bell, CreditCard, LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -14,6 +17,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
+import Spinner from "@/components/ui/spinner";
+import { authClient } from "@/lib/auth-client";
 import { cn, getInitials } from "@/lib/utils";
 
 export default function AccountSwitcher({
@@ -28,6 +33,25 @@ export default function AccountSwitcher({
   }>;
 }) {
   const [activeUser, setActiveUser] = useState(users[0]);
+  const [logoutInProgress, setLogoutInProgress] = useState(false);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onRequest: () => setLogoutInProgress(true),
+        onSuccess: () => {
+          router.push("/auth/login");
+          toast.success("Signed out successfully");
+        },
+        onError(ctx) {
+          toast.error("Failed to sign out", {
+            description: ctx.error.message,
+          });
+        },
+      },
+    });
+  };
 
   return (
     <DropdownMenu>
@@ -66,8 +90,8 @@ export default function AccountSwitcher({
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <LogOut />
+        <DropdownMenuItem onClick={handleSignOut}>
+          {logoutInProgress ? <Spinner /> : <LogOut />}
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

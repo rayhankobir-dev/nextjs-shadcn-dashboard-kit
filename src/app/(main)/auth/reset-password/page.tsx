@@ -2,7 +2,7 @@ import Disclaimer from "@/components/auth/disclaimer";
 import Heading from "@/components/auth/heading";
 import ResetPasswordForm from "@/components/auth/reset-password-form";
 
-const title = "Change Your Password";
+const title = "Reset Your Password";
 const description = "Enter your email to reset your password. We will send you a link to reset your password.";
 
 function ResetPasswordPage() {

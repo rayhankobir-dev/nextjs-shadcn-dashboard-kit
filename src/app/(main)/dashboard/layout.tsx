@@ -10,6 +10,7 @@ import { getSidebarVariant, getSidebarCollapsible } from "@/lib/layout-preferenc
 
 import AccountSwitcher from "./_components/sidebar/account-switcher";
 import ThemeSwitcher from "./_components/sidebar/theme-switcher";
+import { SessionProvider } from "@/providers/AuthProvider";
 
 export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
   const cookieStore = await cookies();
@@ -19,24 +20,26 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
   const sidebarCollapsible = await getSidebarCollapsible();
 
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar variant={sidebarVariant} collapsible={sidebarCollapsible} />
-      <SidebarInset>
-        <header className="bg-background sticky top-0 z-50 flex h-16 w-full shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
-          <div className="flex w-full items-center justify-between px-4 lg:px-6">
-            <div className="flex items-center gap-1 lg:gap-2">
-              <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
-              <h1 className="text-base font-medium">Documents</h1>
+    <SessionProvider>
+      <SidebarProvider defaultOpen={defaultOpen}>
+        <AppSidebar variant={sidebarVariant} collapsible={sidebarCollapsible} />
+        <SidebarInset>
+          <header className="bg-background sticky top-0 z-50 flex h-16 w-full shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16">
+            <div className="flex w-full items-center justify-between px-4 lg:px-6">
+              <div className="flex items-center gap-1 lg:gap-2">
+                <SidebarTrigger className="-ml-1" />
+                <Separator orientation="vertical" className="mx-2 data-[orientation=vertical]:h-4" />
+                <h1 className="text-base font-medium">Documents</h1>
+              </div>
+              <div className="flex items-center gap-2">
+                <ThemeSwitcher />
+                <AccountSwitcher users={users} />
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <ThemeSwitcher />
-              <AccountSwitcher users={users} />
-            </div>
-          </div>
-        </header>
-        {children}
-      </SidebarInset>
-    </SidebarProvider>
+          </header>
+          {children}
+        </SidebarInset>
+      </SidebarProvider>
+    </SessionProvider>
   );
 }

@@ -4,7 +4,7 @@ import React from "react";
 
 import { useRouter } from "next/navigation";
 
-import { EllipsisVertical, CircleUser, CreditCard, MessageSquareDot, LogOut } from "lucide-react";
+import { EllipsisVertical, CircleUser, CreditCard, MessageSquareDot, LogOut, Fingerprint } from "lucide-react";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -21,6 +21,8 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/c
 import Spinner from "@/components/ui/spinner";
 import { authClient } from "@/lib/auth-client";
 import { getInitials } from "@/lib/utils";
+import Link from "next/link";
+import { NextLink } from "@/components/custom/link";
 
 export function NavUser({
   user,
@@ -92,17 +94,29 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <CircleUser />
-                Account
+              <DropdownMenuItem asChild>
+                <NextLink activeClass="bg-gray-100" href="/dashboard/account">
+                  <CircleUser />
+                  Account
+                </NextLink>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
+              <DropdownMenuItem asChild>
+                <NextLink activeClass="bg-gray-100" href="/dashboard/account/billing">
+                  <CreditCard />
+                  Billing
+                </NextLink>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <MessageSquareDot />
-                Notifications
+              <DropdownMenuItem asChild>
+                <NextLink activeClass="bg-gray-100" href="/dashboard/account/notifications">
+                  <MessageSquareDot />
+                  Notifications
+                </NextLink>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <NextLink activeClass="bg-gray-100" href="/dashboard/account/security">
+                  <Fingerprint />
+                  Security
+                </NextLink>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

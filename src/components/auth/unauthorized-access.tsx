@@ -1,13 +1,17 @@
 import Link from "next/link";
 
 import { Home, Lock } from "lucide-react";
+import { RoadFlag } from "@/assets/svg";
 
 export default function UnauthorizedAccess() {
   return (
     <div className="bg-background flex h-full w-full flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md text-center">
-        <Lock className="text-primary mx-auto size-12" />
-        <h1 className="text-foreground mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">Unauthorized Access</h1>
+        <div className="mx-auto w-fit">
+          <RoadFlag />
+        </div>
+        {/* <Lock className="text-primary mx-auto size-12" /> */}
+        <h1 className="text-foreground mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">Access Denied</h1>
         <p className="text-muted-foreground mt-4">
           You do not have permission to view the requested content. Please contact the site administrator{" "}
           <Link href="/support" className="text-primary hover:text-secondary-foreground font-medium duration-300">

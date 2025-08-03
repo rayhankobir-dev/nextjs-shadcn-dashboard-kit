@@ -21,7 +21,7 @@ import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar {...props}>
+    <Sidebar className="" {...props}>
       <SidebarHeader className="flex h-16 w-full flex-row items-center justify-start border-b border-dashed group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center">
         <SidebarMenu className="duration-200 group-data-[collapsible=icon]:w-fit">
           <SidebarMenuItem>
@@ -37,7 +37,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="w-full">
+      <SidebarContent className="no-scrollbar w-full">
         <NavMain items={sidebarItems} />
       </SidebarContent>
       <SidebarFooter>

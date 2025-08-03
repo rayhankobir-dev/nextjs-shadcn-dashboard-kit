@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getSessionCookie } from "better-auth/cookies";
-
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes } from "@/routes";
 
 export async function middleware(req: NextRequest) {
   const { nextUrl } = req;
-  const session = await getSessionCookie(req);
-  console.log("session", session);
+
+  const session = await getSession(req);
   const isLoggedIn = !!session;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
@@ -41,3 +39,17 @@ export const config = {
     "/(api|trpc)(.*)",
   ],
 };
+
+async function getSession(req: NextRequest) {
+  try {
+    const response = await fetch(`${String(process.env.BETTER_AUTH_URL)}/api/auth/get-session`, {
+      method: "GET",
+      headers: req.headers,
+      cache: "no-cache",
+      credentials: "include",
+    });
+    return await response.json();
+  } catch {
+    return null;
+  }
+}

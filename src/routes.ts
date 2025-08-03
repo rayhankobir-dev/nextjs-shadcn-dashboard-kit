@@ -10,7 +10,15 @@ export const publicRoutes: string[] = [];
  * @type {string[]}
  */
 
-export const authRoutes = ["/auth/login", "/auth/signup", "/auth/reset-password"];
+export const authRoutes = [
+  "/auth/login",
+  "/auth/signup",
+  "/auth/reset-password",
+  "/auth/email-verification",
+  "/auth/verify-email",
+  "/auth/forgot-password",
+  "/auth/reset-password",
+];
 
 /**
  * An array of routes that are protected by auth and are public.
@@ -29,4 +37,4 @@ export const apiAuthPrefix = "/api/auth";
  * The default redirect path after login
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = "/";
+export const DEFAULT_LOGIN_REDIRECT = `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`;

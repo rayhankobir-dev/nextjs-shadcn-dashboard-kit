@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 import { ErrorMessage, FormikProvider, useFormik } from "formik";
-import { LogIn } from "lucide-react";
+import { Eye, EyeOff, LogIn, Mail } from "lucide-react";
 import { toast } from "sonner";
 import * as Yup from "yup";
 
@@ -22,11 +22,12 @@ const loginSchema = Yup.object({
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"form">) {
   const [isAuthenticating, setIsAuthenticating] = React.useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "rayhan@gmail.com",
+      password: "Test123#",
     },
     validationSchema: loginSchema,
     onSubmit: async ({ email, password }) => {
@@ -49,14 +50,21 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
           },
           onError(ctx) {
             setIsAuthenticating(false);
-            toast.error("Authentication failed", {
-              description: ctx.error.message,
-            });
+            if (ctx.error.status === 403) {
+              toast.warning("Required email verification", {
+                description: "Please check your email for the verification link",
+              });
+            } else {
+              toast.error("Authentication failed", {
+                description: ctx.error.message,
+              });
+            }
           },
         },
       );
     },
   });
+
   return (
     <FormikProvider value={formik}>
       <form
@@ -85,14 +93,27 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"form">)
                 Forgot your password?
               </Link>
             </div>
-            <Input
-              id="password"
-              type="password"
-              placeholder="******"
-              disabled={isAuthenticating}
-              hasError={!!formik.errors.password && formik.touched.password}
-              {...formik.getFieldProps("password")}
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                type={isPasswordVisible ? "text" : "password"}
+                placeholder="******"
+                disabled={isAuthenticating}
+                hasError={!!formik.errors.password && formik.touched.password}
+                {...formik.getFieldProps("password")}
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3"
+                onClick={() => setIsPasswordVisible((prev) => !prev)}
+              >
+                {isPasswordVisible ? (
+                  <EyeOff className="h-4 w-4 text-gray-400" />
+                ) : (
+                  <Eye className="h-4 w-4 text-gray-400" />
+                )}
+              </button>
+            </div>
             <ErrorMessage name="password" component="p" className="text-destructive text-xs" />
           </div>
           <Button type="submit" className="w-full" isLoading={isAuthenticating}>

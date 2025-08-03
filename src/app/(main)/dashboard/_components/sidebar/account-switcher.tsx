@@ -5,7 +5,16 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { BadgeCheck, Bell, CreditCard, LogOut } from "lucide-react";
+import {
+  BadgeCheck,
+  Bell,
+  CircleUser,
+  CreditCard,
+  Fingerprint,
+  LogOut,
+  MessageSquareDot,
+  Settings,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,6 +29,8 @@ import {
 import Spinner from "@/components/ui/spinner";
 import { authClient } from "@/lib/auth-client";
 import { cn, getInitials } from "@/lib/utils";
+import Link from "next/link";
+import { NextLink } from "@/components/custom/link";
 
 export default function AccountSwitcher({
   users,
@@ -76,17 +87,29 @@ export default function AccountSwitcher({
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <BadgeCheck />
-            Account
+          <DropdownMenuItem asChild>
+            <NextLink activeClass="bg-gray-100" href="/dashboard/account">
+              <CircleUser />
+              Account
+            </NextLink>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <CreditCard />
-            Billing
+          <DropdownMenuItem asChild>
+            <NextLink activeClass="bg-gray-100" href="/dashboard/account/notifications">
+              <MessageSquareDot />
+              Notifications
+            </NextLink>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Bell />
-            Notifications
+          <DropdownMenuItem asChild>
+            <NextLink activeClass="bg-gray-100" href="/dashboard/account/security">
+              <Fingerprint />
+              Security
+            </NextLink>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <NextLink activeClass="bg-gray-100" href="/dashboard/account/settings">
+              <Settings />
+              Settings
+            </NextLink>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

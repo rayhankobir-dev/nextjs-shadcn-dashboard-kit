@@ -120,10 +120,20 @@
   }
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 
 /* sonner styles */
 .toast-sonner {
-  @apply !h-auto !px-4.5 !py-2.5;
+  @apply !h-auto !px-4.5 !py-3;
 }
 
 .toast-sonner[data-type="error"] [data-description] {
@@ -143,17 +153,17 @@
 }
 
 .toast-sonner[data-type="error"] {
-  @apply !border-rose-200
+  @apply !border-rose-200;
 }
 
 .toast-sonner[data-type="info"] {
-  @apply !border-blue-200
+  @apply !border-blue-200;
 }
 
 .toast-sonner[data-type="success"] {
-  @apply !border-green-200
+  @apply !border-green-200;
 }
 
 .toast-sonner[data-type="warning"] {
-  @apply !border-orange-200
+  @apply !border-orange-200;
 }
